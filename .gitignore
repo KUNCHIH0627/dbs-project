@@ -1,0 +1,16 @@
+# Python 虛擬環境
+.venv/
+venv/
+env/
+
+# Python 快取與暫存檔
+__pycache__/
+*.py[cod]
+
+# 環境變數與私密檔案
+.env
+*.log
+
+# 編輯器與系統暫存
+.vscode/
+.DS_Store
