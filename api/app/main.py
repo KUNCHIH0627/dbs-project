@@ -1,23 +1,34 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
+from starlette.types import Scope
+from starlette.exceptions import HTTPException
 
-app = FastAPI(title="My Backend API")
+app = FastAPI()
 
-# 定義 Pydantic 模型
-class Item(BaseModel):
-    name: str
-    price: float
+from .api import router as api_router
+app.include_router(api_router, prefix=f"/api")
 
-@app.get("/health")
-def health_check():
-    return {"status": "ok"}
+# ---- 2. 限制只公開 .html 和 .css ----
+class RestrictedStaticFiles(StaticFiles):
+    async def get_response(self, path: str, scope: Scope):
+        if path and not path.endswith("/"):
+            if not (path.endswith(".html") or path.endswith(".css")):
+                raise HTTPException(status_code=404)
+        return await super().get_response(path, scope)
 
-# 練習 1: 新增 /version 端點
-@app.get("/version")
-def get_version():
-    return {"version": "0.1.0"}
+# ---- 3. 靜態網站掛在 /113321002 底下 ----
+from fastapi.responses import FileResponse
 
-# 練習 2: 新增 POST /items 端點
-@app.post("/items")
-def create_item(item: Item):
-    return item
+# ...existing code...
+
+public_directory = Path(__file__).resolve().parent / "public"
+index_file = public_directory / "index.html"
+
+@app.get("/", include_in_schema=False)
+async def index():
+    return FileResponse(index_file)
+
+app.mount("/", RestrictedStaticFiles(directory=str(public_directory), html=True), name="static")
+
+

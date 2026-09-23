@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open WebUI Style</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="logo">O</div>
+          <span>OpenWebUI</span>
+        </div>
+
+        <nav class="nav" aria-label="Sidebar navigation">
+          <button class="primary">+ 新增對話</button>
+          <button>最近對話</button>
+          <button>收藏</button>
+          <button>設定</button>
+        </nav>
+      </aside>
+
+      <main class="chat-panel">
+        <header class="topbar">
+          <h1>WebUI 實驗室</h1>
+          <div class="status">線上</div>
+        </header>
+
+        <section class="messages" aria-label="聊天內容">
+          <div class="message-row bot">
+            <div class="message bot">
+              你好！這是一個簡單的 Open WebUI 風格範例。<br />
+              這裡是聊天視窗，介面使用純 HTML + CSS。
+            </div>
+          </div>
+
+          <div class="message-row user">
+            <div class="message user">
+              請用最簡單的方式做一個可讀性高的網頁設計。
+            </div>
+          </div>
+
+          <div class="message-row bot">
+            <div class="message bot">
+              可以，這份範例保留最基本的結構，方便你理解每個區塊的用途。
+            </div>
+          </div>
+        </section>
+
+        <div class="composer">
+          <form>
+            <textarea placeholder="輸入你的訊息..."></textarea>
+            <button class="send-button" type="submit">送出</button>
+          </form>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
