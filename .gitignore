@@ -1,16 +1,44 @@
-# Python 虛擬環境
+# ---- Python 虛擬環境 ----
 .venv/
 venv/
 env/
 
-# Python 快取與暫存檔
+# ---- Python 快取與編譯產物 ----
 __pycache__/
 *.py[cod]
+*.pyd
 
-# 環境變數與私密檔案
+# ---- pytest ----
+.pytest_cache/
+
+# ---- coverage ----
+.coverage
+htmlcov/
+*.cover
+
+# ---- mypy ----
+.mypy_cache/
+
+# ---- ruff ----
+.ruff_cache/
+
+# ---- 環境變數與私密檔案 ----
 .env
-*.log
+!.env.example
 
-# 編輯器與系統暫存
+# ---- FastAPI / Uvicorn log ----
+*.log
+logs/
+
+# ---- PostgreSQL 本地資料與備份 ----
+*.sql.bak
+pgdata/
+*.dump
+
+# ---- 編輯器與 IDE ----
 .vscode/
+.idea/
+
+# ---- 作業系統檔案 ----
 .DS_Store
+Thumbs.db
