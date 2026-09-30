@@ -1,13 +1,21 @@
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+# 先載入 .env，確保 ROOT_PATH 等變數在建立 app 之前就緒
+env_path = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(dotenv_path=env_path)
+
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from pathlib import Path
 from starlette.types import Scope
 from starlette.exceptions import HTTPException
 
 app = FastAPI(
     docs_url="/api/docs",
     openapi_url="/api/openapi.json",
+    root_path=os.getenv("ROOT_PATH", ""),
 )
 
 # ---- API router，統一掛在 /api 底下 ----
